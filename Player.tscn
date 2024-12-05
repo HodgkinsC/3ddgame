@@ -1,0 +1,229 @@
+[gd_scene load_steps=18 format=3 uid="uid://cmgpo07upaxrd"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_6vf7g"]
+[ext_resource type="Texture2D" uid="uid://dcp141xneg431" path="res://Sprites/Player-ezgif.com-gif-to-sprite-converter.png" id="2_kpwg0"]
+[ext_resource type="Texture2D" uid="uid://bq0885pnaxpkk" path="res://Sprites/PlayerStab-ezgif.com-gif-to-sprite-converter.png" id="3_4k5fa"]
+[ext_resource type="Texture2D" uid="uid://oy15e76ii561" path="res://Sprites/PlayerRun-ezgif.com-gif-to-sprite-converter.png" id="3_15555"]
+[ext_resource type="Texture2D" uid="uid://6nocajro2pyt" path="res://Sprites/Player Glitch.png" id="4_5f1me"]
+[ext_resource type="AudioStream" uid="uid://dcpe4iup4iijs" path="res://Sounds/Stab.mp3" id="6_0qmhy"]
+[ext_resource type="AudioStream" uid="uid://dmopjvp6vn5nm" path="res://Sounds/Glitch.mp3" id="6_6hcdc"]
+[ext_resource type="AudioStream" uid="uid://dav0ruvca3k08" path="res://Sounds/Run.mp3" id="8_yh3oo"]
+[ext_resource type="Texture2D" uid="uid://cshipslnwaa5b" path="res://Sprites/Heart.png" id="9_imi5j"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rq5os"]
+height = 50.0
+
+[sub_resource type="Animation" id="Animation_8kdr2"]
+resource_name = "Idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprites/Idle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_qkb1j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprites/Idle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprites/Run:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprites/Glitch:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprites/Stab:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_qn527"]
+resource_name = "Run"
+length = 0.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprites/Run:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_ockte"]
+resource_name = "Stab"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprites/Stab:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_eov75"]
+resource_name = "Tele"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprites/Glitch:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_larnc"]
+_data = {
+"Idle": SubResource("Animation_8kdr2"),
+"RESET": SubResource("Animation_qkb1j"),
+"Run": SubResource("Animation_qn527"),
+"Stab": SubResource("Animation_ockte"),
+"Tele": SubResource("Animation_eov75")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d7g3x"]
+radius = 40.0
+
+[node name="Player" type="RigidBody2D"]
+collision_layer = 5
+mass = 10.0
+lock_rotation = true
+script = ExtResource("1_6vf7g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_rq5os")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_larnc")
+}
+autoplay = "Stab"
+
+[node name="rayleft" type="RayCast2D" parent="."]
+position = Vector2(-5, 24)
+target_position = Vector2(0, 8)
+
+[node name="rayright" type="RayCast2D" parent="."]
+position = Vector2(5, 24)
+target_position = Vector2(0, 8)
+
+[node name="sprites" type="Node2D" parent="."]
+
+[node name="Idle" type="Sprite2D" parent="sprites"]
+position = Vector2(1.895, -7)
+texture = ExtResource("2_kpwg0")
+hframes = 4
+
+[node name="Stab" type="Sprite2D" parent="sprites"]
+visible = false
+position = Vector2(1.895, -7)
+texture = ExtResource("3_4k5fa")
+hframes = 12
+
+[node name="Run" type="Sprite2D" parent="sprites"]
+visible = false
+position = Vector2(1.895, -7.005)
+texture = ExtResource("3_15555")
+hframes = 9
+
+[node name="Glitch" type="Sprite2D" parent="sprites"]
+visible = false
+position = Vector2(1.895, -7.005)
+texture = ExtResource("4_5f1me")
+vframes = 2
+
+[node name="GrabPos" type="Marker2D" parent="."]
+position = Vector2(3, 6)
+
+[node name="StabRadius" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StabRadius"]
+shape = SubResource("CircleShape2D_d7g3x")
+disabled = true
+
+[node name="StabAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_0qmhy")
+
+[node name="GlitchAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_6hcdc")
+
+[node name="Run" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_yh3oo")
+
+[node name="Heart1" type="Sprite2D" parent="."]
+position = Vector2(-178, -95)
+texture = ExtResource("9_imi5j")
+vframes = 2
+
+[node name="Heart2" type="Sprite2D" parent="."]
+position = Vector2(-161, -95)
+texture = ExtResource("9_imi5j")
+vframes = 2
+
+[node name="Heart3" type="Sprite2D" parent="."]
+position = Vector2(-144, -95)
+texture = ExtResource("9_imi5j")
+vframes = 2

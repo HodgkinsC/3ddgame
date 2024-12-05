@@ -1,0 +1,90 @@
+[gd_scene load_steps=8 format=3 uid="uid://b7h80ihygenqr"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_oqyqk"]
+[ext_resource type="Texture2D" uid="uid://0t181lnfikpb" path="res://Sprites/Enemy1-ezgif.com-gif-to-sprite-converter (1).png" id="2_ank5q"]
+
+[sub_resource type="Animation" id="Animation_bd3nv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D/EnemySpriteOne:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_qwwd8"]
+resource_name = "move"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D/EnemySpriteOne:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6egio"]
+_data = {
+"RESET": SubResource("Animation_bd3nv"),
+"move": SubResource("Animation_qwwd8")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6jnf0"]
+radius = 11.0
+height = 22.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0rwnp"]
+radius = 11.1803
+
+[node name="enemy" type="RigidBody2D"]
+collision_mask = 6
+mass = 0.1
+lock_rotation = true
+script = ExtResource("1_oqyqk")
+
+[node name="rayleft" type="RayCast2D" parent="."]
+position = Vector2(-12, 4)
+target_position = Vector2(-6, 0)
+collision_mask = 6
+
+[node name="rayright" type="RayCast2D" parent="."]
+position = Vector2(20, 4)
+target_position = Vector2(6, 0)
+collision_mask = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6egio")
+}
+autoplay = "move"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 3)
+shape = SubResource("CapsuleShape2D_6jnf0")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="EnemySpriteOne" type="Sprite2D" parent="Node2D"]
+position = Vector2(-7, -15)
+scale = Vector2(0.171204, 0.171204)
+texture = ExtResource("2_ank5q")
+hframes = 6
+
+[node name="Dam Area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dam Area"]
+shape = SubResource("CircleShape2D_0rwnp")
+
+[connection signal="body_entered" from="Dam Area" to="." method="_on_dam_area_body_entered"]
